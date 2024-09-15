@@ -17,8 +17,6 @@ export class FargateSandboxStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: FargateSandboxStackProps) {
     super(scope, id, props);
 
-    const versionId = "ggg";
-
     const vpc = new Vpc(this, "MyVpc", {
       maxAzs: 3, // Default is all AZs in the region
     });
@@ -32,6 +30,8 @@ export class FargateSandboxStack extends cdk.Stack {
       "test_repo_ref",
       "arn:aws:ecr:us-east-1:637423577773:repository/demo_repo"
     );
+
+    const versionId = process.env.BUILD_ID || "latest";
 
     new ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       cluster: cluster, // Required
@@ -53,7 +53,7 @@ export class FargateSandboxStack extends cdk.Stack {
     });
 
     const output = new cdk.CfnOutput(this, "commitId", {
-      value: process.env.BUILD_ID || "no commit id",
+      value: versionId,
     });
   }
 }
