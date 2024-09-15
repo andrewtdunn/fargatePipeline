@@ -50,7 +50,7 @@ export class FargatePipelineStack extends cdk.Stack {
         'timeout 15 sh -c "until docker info; do echo .; sleep 1; done"',
         "aws --version",
         'export DOCKER_DEFAULT_PLATFORM="linux/amd64"',
-        `aws ecr get-login-password --region ${process.env.region} | docker login --username AWS --password-stdin ${REPOSITORY_URI}`,
+        `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${REPOSITORY_URI}`,
         `COMMIT_HASH=${COMMIT_ID}`,
         "IMAGE_TAG=${COMMIT_HASH:=latest}",
         "echo Build started on `date`",
