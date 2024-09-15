@@ -3,10 +3,8 @@ import { Vpc } from "aws-cdk-lib/aws-ec2";
 import { Repository } from "aws-cdk-lib/aws-ecr";
 import { Cluster, ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { ApplicationLoadBalancedFargateService } from "aws-cdk-lib/aws-ecs-patterns";
-import { Asset } from "aws-cdk-lib/aws-s3-assets";
 import { Construct } from "constructs";
-import path = require("path");
-import { readFileSync } from "fs";
+
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 interface FargateSandboxStackProps extends cdk.StageProps {
