@@ -19,7 +19,7 @@ export class FargateSandboxStack extends cdk.Stack {
     const versionId = "ggg";
 
     const imageDefinitionsFile = new Asset(this, "SampleAsset", {
-      path: path.join(__dirname, "imagedefinitions.json"),
+      path: path.join(__dirname, "../imagedefinitions.json"),
     });
 
     const imageDefinitions = JSON.parse(imageDefinitionsFile.toString());
