@@ -5,4 +5,4 @@
 .cdk.staging
 cdk.out
 
-sample_app/
+react_app/
