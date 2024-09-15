@@ -59,7 +59,7 @@ export class FargatePipelineStack extends cdk.Stack {
         "pwd",
         "cd sample_app",
         "ls",
-        `docker build ${ecrRepo.repositoryName} -t $REPOSITORY_URI:latest --platform linux/amd64 .`,
+        `docker build -t ${ecrRepo.repositoryName} --platform linux/amd64 .`,
         "docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG",
         "cd ..",
         "echo Build completed on `date`",
