@@ -36,7 +36,7 @@ export class FargateSandboxStack extends cdk.Stack {
     new ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       cluster: cluster, // Required
       cpu: 512, // Default is 256
-      desiredCount: 3, // Default is 1
+      desiredCount: 1, // Default is 1
       taskImageOptions: {
         image: ContainerImage.fromEcrRepository(repo, versionId),
       },
