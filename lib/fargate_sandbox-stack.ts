@@ -6,6 +6,7 @@ import { ApplicationLoadBalancedFargateService } from "aws-cdk-lib/aws-ecs-patte
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
 import { Construct } from "constructs";
 import path = require("path");
+import { readFileSync } from "fs";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 interface FargateSandboxStackProps extends cdk.StageProps {
@@ -22,8 +23,9 @@ export class FargateSandboxStack extends cdk.Stack {
       path: path.join(__dirname, "../imagedefinitions.json"),
     });
 
-    const imageDefinitions = JSON.parse(imageDefinitionsFile.toString());
-    const uri = imageDefinitions[0].imageUri;
+    const imageDefinitions = imageDefinitionsFile.toString();
+    const file = JSON.parse(readFileSync(imageDefinitions, "utf-8"));
+    const uri = file[0].imageUri;
 
     // The code that defines your stack goes here
 
