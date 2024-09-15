@@ -58,6 +58,7 @@ export class FargatePipelineStack extends cdk.Stack {
         `export REPOSITORY_URI='${REPOSITORY_URI}'`,
         "pwd",
         "cd sample_app",
+        "ls",
         `docker build -f ./Dockerfile.codebuild  -t $REPOSITORY_URI:latest --platform linux/amd64 .`,
         "docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG",
         "cd ..",
