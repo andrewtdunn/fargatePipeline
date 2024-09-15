@@ -57,7 +57,7 @@ export class FargatePipelineStack extends cdk.Stack {
         "echo Building the Docker image...",
         `export REPOSITORY_URI='${REPOSITORY_URI}'`,
         "pwd",
-        "cd azure_query_async",
+        "cd sample_app",
         //"docker build -f ./Dockerfile.codebuild -t $REPOSITORY_URI:latest .",
         `docker build -t demo_repo --platform linux/amd64 .`,
         "docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG",
