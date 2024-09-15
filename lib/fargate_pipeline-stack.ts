@@ -42,8 +42,6 @@ export class FargatePipelineStack extends cdk.Stack {
       }
     );
 
-    const COMMIT_ID: string = Date.now().toString();
-
     const preBuildStep = new CodeBuildStep("PreBuildStep", {
       input: codeRepo,
       commands: [
@@ -71,9 +69,6 @@ export class FargatePipelineStack extends cdk.Stack {
         `printf \'[{"name":"%s","imageUri":"%s"}]\' ${ecrRepo.repositoryName} $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json`,
       ],
       primaryOutputDirectory: "./",
-      env: {
-        COMMIT_ID,
-      },
       role: preBuildRole,
     });
 
@@ -83,9 +78,6 @@ export class FargatePipelineStack extends cdk.Stack {
       synth: new cdk.pipelines.ShellStep("SynthStep", {
         input: preBuildStep,
         commands: ["npm ci", "npm run build", "npx cdk synth"],
-        env: {
-          COMMIT_ID,
-        },
       }),
     });
 
