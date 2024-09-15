@@ -6,11 +6,15 @@ import { ApplicationLoadBalancedFargateService } from "aws-cdk-lib/aws-ecs-patte
 import { Construct } from "constructs";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
+interface FargateSandboxStackProps extends cdk.StageProps {
+  commitId: string;
+}
+
 export class FargateSandboxStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: FargateSandboxStackProps) {
     super(scope, id, props);
 
-    const versionId = "ggg";
+    const versionId = props?.commitId;
 
     // The code that defines your stack goes here
 

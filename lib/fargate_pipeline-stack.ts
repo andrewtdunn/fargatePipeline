@@ -42,7 +42,7 @@ export class FargatePipelineStack extends cdk.Stack {
       }
     );
 
-    const COMMIT_ID: string = "ggg";
+    const COMMIT_ID: string = Date.now().toString();
 
     const preBuildStep = new CodeBuildStep("PreBuildStep", {
       input: codeRepo,
@@ -95,6 +95,7 @@ export class FargatePipelineStack extends cdk.Stack {
           account: "730335377532",
           region: "us-east-1",
         },
+        commitId: COMMIT_ID,
       })
     );
   }
