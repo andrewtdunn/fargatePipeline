@@ -19,21 +19,6 @@ export class FargateSandboxStack extends cdk.Stack {
 
     const versionId = "ggg";
 
-    const imageDefinitionsFile = new Asset(this, "SampleAsset", {
-      path: path.join(__dirname, "../imagedefinitions.json"),
-    });
-
-    const imageDefinitions = imageDefinitionsFile.toString();
-    const file = JSON.parse(readFileSync(imageDefinitions, "utf-8"));
-    const uri = file[0].imageUri;
-
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'FargateSandboxQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
-
     const vpc = new Vpc(this, "MyVpc", {
       maxAzs: 3, // Default is all AZs in the region
     });
@@ -67,8 +52,8 @@ export class FargateSandboxStack extends cdk.Stack {
       },
     });
 
-    const output = new cdk.CfnOutput(this, "ImageDefinitionsJson", {
-      value: uri,
+    const output = new cdk.CfnOutput(this, "commitId", {
+      value: process.env.COMMIT_HASH || "no commit id",
     });
   }
 }
