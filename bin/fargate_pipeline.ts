@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
-import * as cdk from 'aws-cdk-lib';
-import { FargatePipelineStack } from '../lib/fargate_pipeline-stack';
+import "source-map-support/register";
+import * as cdk from "aws-cdk-lib";
+import { FargatePipelineStack } from "../lib/fargate_pipeline-stack";
 
 const app = new cdk.App();
-new FargatePipelineStack(app, 'FargatePipelineStack', {
+new FargatePipelineStack(app, "FargatePipelineStack", {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -15,7 +15,9 @@ new FargatePipelineStack(app, 'FargatePipelineStack', {
 
   /* Uncomment the next line if you know exactly what Account and Region you
    * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
+  env: { account: "637423577773", region: "us-east-1" },
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+app.synth();
