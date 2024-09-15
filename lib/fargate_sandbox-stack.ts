@@ -3,7 +3,9 @@ import { Vpc } from "aws-cdk-lib/aws-ec2";
 import { Repository } from "aws-cdk-lib/aws-ecr";
 import { Cluster, ContainerImage } from "aws-cdk-lib/aws-ecs";
 import { ApplicationLoadBalancedFargateService } from "aws-cdk-lib/aws-ecs-patterns";
+import { Asset } from "aws-cdk-lib/aws-s3-assets";
 import { Construct } from "constructs";
+import path = require("path");
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 interface FargateSandboxStackProps extends cdk.StageProps {
@@ -15,6 +17,13 @@ export class FargateSandboxStack extends cdk.Stack {
     super(scope, id, props);
 
     const versionId = "ggg";
+
+    const imageDefinitionsFile = new Asset(this, "SampleAsset", {
+      path: path.join(__dirname, "imagedefinitions.json"),
+    });
+
+    const imageDefinitions = JSON.parse(imageDefinitionsFile.toString());
+    const uri = imageDefinitions[0].imageUri;
 
     // The code that defines your stack goes here
 
@@ -54,6 +63,10 @@ export class FargateSandboxStack extends cdk.Stack {
         startPeriod: cdk.Duration.minutes(1),
         timeout: cdk.Duration.seconds(5),
       },
+    });
+
+    const output = new cdk.CfnOutput(this, "ImageDefinitionsJson", {
+      value: uri,
     });
   }
 }
