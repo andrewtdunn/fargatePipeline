@@ -3,6 +3,8 @@
 *.d.ts
 node_modules
 
+!sample_app/src/react-app-env.d.ts
+
 # CDK asset staging directory
 .cdk.staging
 cdk.out
