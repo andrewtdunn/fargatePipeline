@@ -14,7 +14,7 @@ export class FargateSandboxStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: FargateSandboxStackProps) {
     super(scope, id, props);
 
-    const versionId = props?.commitId;
+    const versionId = "ggg";
 
     // The code that defines your stack goes here
 

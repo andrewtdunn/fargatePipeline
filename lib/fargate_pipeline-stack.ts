@@ -51,7 +51,7 @@ export class FargatePipelineStack extends cdk.Stack {
         "aws --version",
         'export DOCKER_DEFAULT_PLATFORM="linux/amd64"',
         `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${REPOSITORY_URI}`,
-        `COMMIT_HASH=${COMMIT_ID}`,
+        `COMMIT_HASH=$CODEBUILD_BUILD_NUMBER`,
         "IMAGE_TAG=${COMMIT_HASH:=latest}",
         "echo Build started on `date`",
         "echo Building the Docker image...",
@@ -95,7 +95,6 @@ export class FargatePipelineStack extends cdk.Stack {
           account: "730335377532",
           region: "us-east-1",
         },
-        commitId: COMMIT_ID,
       })
     );
   }
