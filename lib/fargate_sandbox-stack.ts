@@ -53,7 +53,7 @@ export class FargateSandboxStack extends cdk.Stack {
     });
 
     const output = new cdk.CfnOutput(this, "commitId", {
-      value: process.env.COMMIT_HASH || "no commit id",
+      value: process.env.BUILD_ID || "no commit id",
     });
   }
 }
