@@ -20,6 +20,7 @@ export class FargatePipelineStack extends cdk.Stack {
 
     const pipeline = new CodePipeline(this, "FargatePipeline", {
       pipelineName: "FargatePipeline",
+      crossAccountKeys: true,
       synth: new cdk.pipelines.ShellStep("SynthStep", {
         input: codeRepo,
         commands: ["npm ci", "npm run build", "npx cdk synth"],
