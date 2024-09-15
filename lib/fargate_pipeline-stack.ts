@@ -1,6 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { CodePipeline, CodePipelineSource } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
+import { FargatePipelineStage } from "./fargate_pipeline-stage";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 const GITHUB_CONNECTION_ARN: string =
@@ -26,5 +27,14 @@ export class FargatePipelineStack extends cdk.Stack {
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
     });
+
+    pipeline.addStage(
+      new FargatePipelineStage(this, "Dev", {
+        env: {
+          account: "730335377532",
+          region: "us-east-1",
+        },
+      })
+    );
   }
 }
